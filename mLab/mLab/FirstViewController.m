@@ -14,52 +14,49 @@
 
 @implementation FirstViewController
 
-static bool first=true;
+static bool subview=true;
 @synthesize inputStream,outputStream;
 @synthesize webView;
 @synthesize frameNumber;
 @synthesize image_obj;
+@synthesize subViewButton;
+@synthesize imageArray;
 
 
 - (IBAction)showMenu
 {
+    [inputStream close];
+    [outputStream close];
     [self.sideMenuViewController presentMenuViewController];
 }
 
 - (void) viewDidLoad
 {
-    
-    
-    
     [self loadView];
+    subViewButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(setSubview)];
+    self.navigationItem.rightBarButtonItems= [[NSArray alloc] initWithObjects:subViewButton, nil];
     self.view.frame=CGRectMake(0, 200, 769, 911);
-    if (first) {
-       
-        self.image_obj = [NSMutableArray array];
-        self.images=self.image_obj;
-        [self initNetworkCommunication];
-        [self joinChat];
-        [self sendMessage];
-        first=false;
-    }
-    
-
+    self.image_obj = [NSMutableArray array];
+    self.imageArray = [NSMutableArray array];
+    self.images=self.image_obj;
+    [self initNetworkCommunication];
+    [self joinChat];
+    [self sendMessage];
 }
 
-- (void) viewDidAppear:(BOOL)animated
+- (void)setSubview
 {
-    [super viewDidAppear:animated];
-    NSLog(@"------------AAAAAAAA------------");
-    
+    NSLog(@"----CLICK------");
+    subview=true;
+    [self loadView];
 }
-
 
 
 - (void) initNetworkCommunication {
 	
 	CFReadStreamRef readStream;
 	CFWriteStreamRef writeStream;
-	CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"158.130.105.143", 1234, &readStream, &writeStream);
+	CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"158.130.104.167", 1234, &readStream, &writeStream);
 	
 	inputStream = (__bridge NSInputStream *)readStream;
 	outputStream = (__bridge NSOutputStream *)writeStream;
@@ -112,6 +109,7 @@ static bool first=true;
                             NSInteger output_int=[output integerValue];
                            // *frameNumber=output_int;
                             frameNumber=output_int;
+                            [imageArray addObject:[NSNumber numberWithInteger:frameNumber]];
                             [self showPics:output_int];
                         
 						}
@@ -127,7 +125,7 @@ static bool first=true;
 			break;
 			
 		case NSStreamEventEndEncountered:
-            
+            NSLog(@"Finished!!!!");
             [theStream close];
             [theStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
             //[theStream release];
@@ -141,8 +139,11 @@ static bool first=true;
 
 -(void) imgTouchUp:(id)sender {
     UITapGestureRecognizer *gesture = (UITapGestureRecognizer *) sender;
-    NSLog(@"Taped Image tag is %ld", (long)gesture.view.tag);
-    NSString *frameStr=[NSString stringWithFormat:@"%d",(int)frameNumber];
+    int index=(int)gesture.view.tag;
+    NSLog(@"Taped Image tag is %d", index);
+    NSInteger frame_num=[[imageArray objectAtIndex:index+1] intValue];
+    NSLog(@"frame number is %d", frame_num);
+    NSString *frameStr=[NSString stringWithFormat:@"%d",(int)frame_num];
     frameStr=[frameStr stringByAppendingString:@".json"];
     NSString *searchURL=[@"http://158.130.12.47:3000/uploads/fullsize/" stringByAppendingString:frameStr];
     NSLog(@"url string: %@",searchURL);
@@ -151,6 +152,7 @@ static bool first=true;
     NSString *myUrl= [json objectForKey:@"url"];
     NSLog(@"%@",myUrl);
     [self.view bringSubviewToFront:webView];
+    subview=false;
      NSURLRequest *myRequest =[NSURLRequest requestWithURL:[NSURL URLWithString:myUrl]];
     [webView loadRequest:myRequest];
     UIImageView *imageView = [self.imageViews objectAtIndex:gesture.view.tag];
@@ -171,8 +173,9 @@ static bool first=true;
         [self.image_obj addObject:[UIImage imageWithData:imageData]];
     }
     self.images=self.image_obj;
-    [self loadView];
-    
+    if(subview){
+        [self loadView];
+    }
     
 }
 

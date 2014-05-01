@@ -22,10 +22,12 @@
 @property (nonatomic, retain) IBOutlet UIWebView *webView;
 @property (nonatomic, assign) NSInteger frameNumber;
 @property (nonatomic, strong) NSMutableArray *image_obj;
-
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *subViewButton;
+@property (nonatomic, strong) NSMutableArray *imageArray;
 
 - (void) initNetworkCommunication;
 - (void) joinChat;
 - (void) sendMessage;
+- (void) setSubview;
 
 @end

@@ -52,9 +52,11 @@
                                 <action selector="showMenu" destination="ACg-sk-v6b" id="peT-JE-wPP"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="O3V-eJ-oIS"/>
                     </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="768" height="1000"/>
                     <connections>
+                        <outlet property="subViewButton" destination="O3V-eJ-oIS" id="NHu-jY-tNr"/>
                         <outlet property="webView" destination="5bY-H9-VHV" id="LoZ-u4-f5Y"/>
                     </connections>
                 </viewController>
