@@ -40,8 +40,8 @@ static bool subview=true;
     self.imageArray = [NSMutableArray array];
     self.images=self.image_obj;
     [self initNetworkCommunication];
-    [self joinChat];
-    [self sendMessage];
+    //[self joinChat];
+    //[self sendMessage];
 }
 
 - (void)setSubview
@@ -141,8 +141,7 @@ static bool subview=true;
     UITapGestureRecognizer *gesture = (UITapGestureRecognizer *) sender;
     int index=(int)gesture.view.tag;
     NSLog(@"Taped Image tag is %d", index);
-    NSInteger frame_num=[[imageArray objectAtIndex:index+1] intValue];
-    NSLog(@"frame number is %d", frame_num);
+    NSInteger frame_num=[[imageArray objectAtIndex:index] intValue];
     NSString *frameStr=[NSString stringWithFormat:@"%d",(int)frame_num];
     frameStr=[frameStr stringByAppendingString:@".json"];
     NSString *searchURL=[@"http://158.130.12.47:3000/uploads/fullsize/" stringByAppendingString:frameStr];
