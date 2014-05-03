@@ -21,7 +21,8 @@ static bool subview=true;
 @synthesize image_obj;
 @synthesize subViewButton;
 @synthesize imageArray;
-
+@synthesize titleImage;
+@synthesize imageOfTitle;
 
 - (IBAction)showMenu
 {
@@ -49,6 +50,7 @@ static bool subview=true;
     NSLog(@"----CLICK------");
     subview=true;
     [self loadView];
+    [titleImage setImage:imageOfTitle];
 }
 
 
@@ -103,15 +105,21 @@ static bool subview=true;
 						
 						NSString *output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
 						
-						if (nil != output) {
+						if (output != nil) {
                             
 							NSLog(@"server said: %@", output);
-                            NSInteger output_int=[output integerValue];
-                           // *frameNumber=output_int;
-                            frameNumber=output_int;
-                            [imageArray addObject:[NSNumber numberWithInteger:frameNumber]];
-                            [self showPics:output_int];
-                        
+                            NSArray *item = [output componentsSeparatedByString:@":"];
+                            if([[item objectAtIndex:0] isEqualToString:@"video"]){
+                                [self setTitle:[item objectAtIndex:1]];
+                                
+                            }
+                            if([[item objectAtIndex:0] isEqualToString:@"image"]){
+                                NSInteger output_int=[[item objectAtIndex:1] integerValue];
+                                NSLog(@"%ld",(long)output_int);
+                                frameNumber=output_int;
+                                [imageArray addObject:[NSNumber numberWithInteger:frameNumber]];
+                                [self showPics:output_int];
+                            }
 						}
 					}
 				}
@@ -135,6 +143,27 @@ static bool subview=true;
 		default:
 			NSLog(@"Unknown event");
 	}
+}
+
+-(void) setTitle:(NSString *) imageString
+{
+    NSLog(@"-----%@---------", imageString);
+    if([imageString isEqualToString:@"RachaelRay\n"]){
+        imageOfTitle = [UIImage imageNamed:@"ws.jpg"];
+        [image_obj removeAllObjects];
+        [imageArray removeAllObjects];
+        [self loadView];
+        [titleImage setImage:imageOfTitle];
+    }
+    if([imageString isEqualToString:@"macys\n"]){
+        imageOfTitle = [UIImage imageNamed:@"macy.png"];
+        [image_obj removeAllObjects];
+        [imageArray removeAllObjects];
+        [self loadView];
+        [titleImage setImage:imageOfTitle];
+        
+    }
+    
 }
 
 -(void) imgTouchUp:(id)sender {
@@ -174,6 +203,7 @@ static bool subview=true;
     self.images=self.image_obj;
     if(subview){
         [self loadView];
+        [titleImage setImage:imageOfTitle];
     }
     
 }

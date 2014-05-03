@@ -24,7 +24,8 @@
 @property (nonatomic, strong) NSMutableArray *image_obj;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *subViewButton;
 @property (nonatomic, strong) NSMutableArray *imageArray;
-
+@property (strong, nonatomic) IBOutlet UIImageView *titleImage;
+@property (strong, nonatomic) UIImage *imageOfTitle;
 - (void) initNetworkCommunication;
 - (void) joinChat;
 - (void) sendMessage;

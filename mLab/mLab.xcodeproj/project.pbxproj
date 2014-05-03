@@ -23,6 +23,7 @@
 		864393781912A3AD00EFA1F7 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 864393761912A3AD00EFA1F7 /* Icon-Small@2x.png */; };
 		8643937E1912A5C400EFA1F7 /* image1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8643937D1912A5C400EFA1F7 /* image1.png */; };
 		864393801912A60300EFA1F7 /* image2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8643937F1912A60300EFA1F7 /* image2.png */; };
+		865C8BCA19158BC100840B8B /* macy.png in Resources */ = {isa = PBXBuildFile; fileRef = 865C8BC919158BC100840B8B /* macy.png */; };
 		86B269CB190ABC0E00CBE749 /* ws.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 86B269CA190ABC0E00CBE749 /* ws.jpg */; };
 		86B97BE3190B5B6000365097 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86B97BE2190B5B6000365097 /* CoreData.framework */; };
 		86B97BE5190B5B7300365097 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86B97BE4190B5B7300365097 /* Security.framework */; };
@@ -87,6 +88,7 @@
 		864393761912A3AD00EFA1F7 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		8643937D1912A5C400EFA1F7 /* image1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image1.png; sourceTree = "<group>"; };
 		8643937F1912A60300EFA1F7 /* image2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image2.png; sourceTree = "<group>"; };
+		865C8BC919158BC100840B8B /* macy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = macy.png; sourceTree = "<group>"; };
 		86B269CA190ABC0E00CBE749 /* ws.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ws.jpg; sourceTree = "<group>"; };
 		86B97BE2190B5B6000365097 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		86B97BE4190B5B7300365097 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -299,6 +301,7 @@
 		86C9807718C50D8400C3FF57 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				865C8BC919158BC100840B8B /* macy.png */,
 				8643937F1912A60300EFA1F7 /* image2.png */,
 				8643937D1912A5C400EFA1F7 /* image1.png */,
 				864393751912A3AD00EFA1F7 /* Icon-Small.png */,
@@ -407,6 +410,7 @@
 				86C9802F18C4DECF00C3FF57 /* InfoPlist.strings in Resources */,
 				864393771912A3AD00EFA1F7 /* Icon-Small.png in Resources */,
 				86C9803818C4DECF00C3FF57 /* Main.storyboard in Resources */,
+				865C8BCA19158BC100840B8B /* macy.png in Resources */,
 				8643936C1912A33200EFA1F7 /* Icon-76@2x.png in Resources */,
 				864393731912A37300EFA1F7 /* Icon-72.png in Resources */,
 				864393701912A35B00EFA1F7 /* Icon-40@2x.png in Resources */,
